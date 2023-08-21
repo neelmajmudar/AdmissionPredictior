@@ -128,6 +128,3 @@ nnmodel.evaluate_model()
 #nnmodel.plot_feature_importance()
 #nnmodel.plot_prediction_actual()
 print(nnmodel.predict(test_prediction))
-
-
-
