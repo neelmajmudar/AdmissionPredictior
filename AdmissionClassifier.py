@@ -13,8 +13,6 @@ from sklearn.metrics import r2_score
 from sklearn.preprocessing import MinMaxScaler
 from keras.layers import Dense
 from tensorflow.keras.utils import plot_model
-import pydot
-import graphviz
 
 data = 'admissions_data.csv'
 #Best R-Squared = 0.8337742714594505
@@ -33,13 +31,13 @@ class AdmissionRNN:
     def build_model(self):
         model = Sequential()
         model.add(Dense(units=7, activation='relu'))
-        model.add(Dense(units=7, activation='relu'))
+        model.add(Dense(units=14, activation='relu'))
         model.add(Dense(units=4, activation='relu'))
         model.add(Dense(units=1, activation='linear'))
         model.compile(optimizer='adam', loss='mean_squared_error', metrics=['mae'])
         return model
     
-    def train_model(self, epochs=100, batch_size=32, validation_split=0.2, random_state=42):
+    def train_model(self, epochs=100, batch_size=32, validation_split=0.2):
         self.history = self.model.fit(self.x_train, self.y_train, batch_size=batch_size, epochs=epochs, validation_split=validation_split)
         
     def evaluate_model(self):
@@ -108,6 +106,7 @@ class AdmissionRNN:
     	#Change to actual - residual plot
    		predictions = self.model.predict(self.x_test)
    		actual = self.y_test.to_numpy().flatten()
+   		#Residual = actual value - predicted value
    		residual = actual - predictions.flatten()
    		plt.figure(figsize=(10,6))
    		plt.scatter(actual, residual, color='blue', alpha=0.5)
@@ -116,6 +115,8 @@ class AdmissionRNN:
    		plt.title('Actual vs Residual')
    		plt.grid(True)
    		return plt.show()
+    def on_train_end(self):
+        self.model.save('model.h5')
 
 
 test_prediction = [325,112,3,3.5,3.5,8.45,0]
@@ -123,8 +124,12 @@ nnmodel = AdmissionRNN(data)
 nnmodel.build_model()
 nnmodel.train_model()
 nnmodel.evaluate_model()
+nnmodel.on_train_end()
 #nnmodel.plot_loss()
 #nnmodel.plot_epoch_mae()
 #nnmodel.plot_feature_importance()
 #nnmodel.plot_prediction_actual()
 print(nnmodel.predict(test_prediction))
+
+
+
