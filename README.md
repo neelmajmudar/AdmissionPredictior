@@ -1,66 +1,80 @@
 # 🎓 Admission Predictor
 
 ## About
-Admission Predictor is a machine learning-driven solution that estimates the likelihood of university admissions based on applicant profiles. Leveraging a blend of academic, standardized test, and extracurricular data, this tool empowers students, counselors, and institutions to gain insights into application outcomes. It supports CSV batch processing, enables model retraining, and provides performance evaluation to facilitate data-informed decision-making.
+
+**Admission Predictor** is a machine learning web application that estimates the probability of university admission based on academic and research credentials. Built with Python and Streamlit, it features both an interactive front-end and a modular backend for model training, evaluation, and visualization. The tool supports fast experimentation and clear interpretability using regression models and feature importance diagnostics.
 
 ## Features
-- **Wide-ranging input**  
-  Handles applicant data including GRE, TOEFL, University Rating, SOP strength, LOR strength, CGPA, and research experience.
 
-- **Prediction outputs**  
-  Provides smooth probability scores (0–1) for admission chances and bins them into percentile categories for easy interpretation.
+- **🔘 Interactive Web App**  
+  Launch `AdmissionApp.py` to access a Streamlit-based interface where users can upload data, generate predictions, and view visualizations.
 
-- **Model flexibility**  
-  Includes options for linear regression, random forest, and neural networks. Easily switchable based on experimental needs.
+- **🧠 Model Training & Evaluation**  
+  `AdmissionClassifier.py` trains and evaluates models using the data in `admissions_data.csv`. It supports regression models such as Random Forest and Linear Regression.
 
-- **Complete toolchain**  
-  From preprocessing and training to prediction and evaluation—it supports the full ML workflow through  `AdmissionClassifier.py`.
+- **📊 Visual Analytics**  
+  Key diagnostic plots are generated during training:
+  - `Actual vs Residual.png`
+  - `Training&ValidationLoss.png`
+  - `Training&ValidationMAE.png`
+  - `Feature Importances.png`
 
-- **Visualization support**  
-  Generates model diagnostics (e.g. ROC, predicted vs. actual plots) for deeper insights into strengths and weaknesses.
+- **🧹 Data Preprocessing**  
+  Built-in preprocessing using `Pandas` and `NumPy`, including feature scaling and automatic train/test splitting.
 
-- **Configurable and reproducible**  
-  Utilizes config files or CLI flags for setting hyperparameters, data paths, or model types. Ensures reproducibility with fixed seeds and clear documentation.
+- **📈 Evaluation Metrics**  
+  The model is evaluated using:
+  - Mean Absolute Error (MAE)  
+  - Mean Squared Error (MSE)  
+  - R² Score  
+  - Loss and MAE visualizations across training epochs
 
-## Project overview
-Admission Predictor is organized to support seamless experimentation:
+- **🧾 Explainability**  
+  Feature importance visualizations provide transparency into which input variables most affect predictions.
 
-- **Data ingestion**  
-  Clean and scale datasets via `data/prepare_data.py`. Supports splitting into training, validation, and test sets.
+## File Overview
 
-- **Model training**  
-  The `train.py` script ingests preprocessed data to train a selected model (linear regression, random forest, etc.). After training, models are serialized for reuse.
-
-- **Batch prediction**  
-  Use `predict.py` to apply trained models to new applicant data in CSV form. Includes CLI options for thresholds, batching, and output customization.
-
-- **Performance evaluation**  
-  The `evaluate.py` script compares predictions to ground truth using metrics like Mean Squared Error (MSE), R², classification accuracy, and ROC/AUC. Optional visual plots help assess model validity.
-
-- **Extensibility**  
-  Easily plug in new models (e.g. XGBoost, TensorFlow/Keras nets) or add engineered features (like work experience, essays). The modular codebase ensures contributors can enhance each component independently.
-
-- **Usage flow**  
-  1. `prepare_data.py` → 2. `train.py` → 3. `predict.py` → 4. `evaluate.py` (optional retraining) → repeat.
-
----
+| File                         | Description                                           |
+|------------------------------|-------------------------------------------------------|
+| `AdmissionApp.py`           | Streamlit front-end for interactive predictions and visualizations |
+| `AdmissionClassifier.py`    | Core backend script for training and evaluation       |
+| `admissions_data.csv`       | Dataset containing historical applicant records       |
+| `Actual vs Residual.png`    | Plot showing residual error for trained model         |
+| `Feature Importances.png`   | Bar chart ranking most influential features           |
+| `Training&ValidationLoss.png` | Training vs validation loss over epochs             |
+| `Training&ValidationMAE.png` | Training vs validation MAE over epochs              |
+| `README.md`                 | Project documentation                                 |
+| `LICENSE`                   | Project license (MIT)                                 |
 
 ## Quickstart
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/neelmajmudar/AdmissionPredictior.git
 cd AdmissionPredictior
-python3 -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
 
-# Prepare data
-python data/prepare_data.py --input data/raw_admissions.csv --output data/processed.pkl
+pip install "Everything given in AdmissionClassifier and App.py
 
-# Train model
-python train.py --data data/processed.pkl --model models/admit_rf.pkl
+streamlit run AdmissionApp.py
 
-# Predict on new applicants
-python predict.py --input new_students.csv --model models/admit_rf.pkl --output results/predictions.csv
+## Technologies Used
 
-# Evaluate on a test set
-python evaluate.py --model models/admit_rf.pkl --test data/test.csv --plots --metrics
+- **Languages & Libraries**  
+  Python, Pandas, NumPy, scikit-learn, OpenCV, Matplotlib, Seaborn
+
+- **Frameworks**  
+  Streamlit (for frontend UI)
+
+- **Models**  
+  Linear Regression, Random Forest (extensible to more)
+
+- **Evaluation Metrics**  
+  MAE, MSE, R² Score
+
+## Future Improvements
+
+- Add support for neural networks (e.g., Keras)
+- Enable user-based retraining in-browser
+- Integrate essay/text features via NLP
+- Deploy with authentication for student accounts
