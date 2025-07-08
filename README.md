@@ -76,7 +76,8 @@
 git clone https://github.com/neelmajmudar/AdmissionPredictior.git
 cd AdmissionPredictior
 
-pip install "Everything given in AdmissionClassifier and App.py
+pip install (Everything given in AdmissionClassifier and App.py)
 
 streamlit run AdmissionApp.py
+```
 
