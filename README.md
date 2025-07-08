@@ -14,7 +14,7 @@ Admission Predictor is a machine learning-driven solution that estimates the lik
   Includes options for linear regression, random forest, and neural networks. Easily switchable based on experimental needs.
 
 - **Complete toolchain**  
-  From preprocessing and training to prediction and evaluation—it supports the full ML workflow through `train.py`, `predict.py`, and `evaluate.py`.
+  From preprocessing and training to prediction and evaluation—it supports the full ML workflow through  `AdmissionClassifier.py`.
 
 - **Visualization support**  
   Generates model diagnostics (e.g. ROC, predicted vs. actual plots) for deeper insights into strengths and weaknesses.
