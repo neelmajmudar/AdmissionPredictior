@@ -46,18 +46,6 @@
 | `README.md`                 | Project documentation                                 |
 | `LICENSE`                   | Project license (MIT)                                 |
 
-## Quickstart
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/neelmajmudar/AdmissionPredictior.git
-cd AdmissionPredictior
-
-pip install "Everything given in AdmissionClassifier and App.py
-
-streamlit run AdmissionApp.py
-
 ## Technologies Used
 
 - **Languages & Libraries**  
@@ -78,3 +66,17 @@ streamlit run AdmissionApp.py
 - Enable user-based retraining in-browser
 - Integrate essay/text features via NLP
 - Deploy with authentication for student accounts
+
+
+## Quickstart
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/neelmajmudar/AdmissionPredictior.git
+cd AdmissionPredictior
+
+pip install "Everything given in AdmissionClassifier and App.py
+
+streamlit run AdmissionApp.py
+
